@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 
 /* Macros*/
+extern char **environ;
 
 /* Readline */
 char *readline();
@@ -22,5 +23,8 @@ void exec_cmd(char *command, const char *program);
 
 /* Utils */
 void trim(char *s);
+
+/* Environ */
+void print_env(void);
 
 #endif

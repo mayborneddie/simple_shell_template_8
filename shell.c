@@ -25,7 +25,12 @@ int main(int argc __attribute__((unused)), char const *argv[])
 			free(str);
 			exit(EXIT_SUCCESS);
 		}
-
+		if (is_equal(str, "env"))
+		{
+			free(str);
+			print_env();
+			continue;
+		}
 		exec_cmd(str, argv[0]);
 	}
 
