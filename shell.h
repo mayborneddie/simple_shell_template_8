@@ -23,12 +23,11 @@ void exec_cmd(char *command, const char *program);
 
 /* Utils */
 void trim(char *s);
+char **split(char *str, char delimiter);
+size_t _len(char **arr);
 
 /* Environ */
 void print_env(void);
-
-/* Getline */
-ssize_t _getline(char **line_ptr, size_t *line_size, int fd);
 
 /* Memory */
 void *_memchr(const void *s, int c, size_t n);

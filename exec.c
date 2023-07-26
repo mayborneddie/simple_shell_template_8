@@ -21,15 +21,15 @@ void exec_cmd(char *command, const char *program)
 	}
 	else if (pid == 0)
 	{
-		char *args[] = {NULL, NULL};
+		char **args = split(command, ' ');
 		char *envp[] = {NULL};
 
-		args[0] = command;
-		if (execve(command, args, envp) == -1)
+		if (execve(args[0], args, envp) == -1)
 		{
 			perror(program);
 			exit(EXIT_FAILURE);
 		}
+		free(args);
 	}
 	else
 	{
