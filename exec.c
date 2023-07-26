@@ -35,4 +35,6 @@ void exec_cmd(char *command, const char *program)
 	{
 		wait(&status);
 	}
+
+	free(command);
 }
