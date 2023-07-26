@@ -9,11 +9,28 @@
  */
 void exec_cmd(char *command, const char *program)
 {
-	char *args[] = {NULL};
+	pid_t pid;
+	int status;
 
-	if (execve(command, args, NULL) == -1)
+	pid = fork();
+
+	if (pid == -1)
 	{
-		perror(program);
-		exit(EXIT_FAILURE);
+		perror("fork");
+		exit(1);
+	}
+	else if (pid == 0)
+	{
+		char *args[] = {NULL};
+
+		if (execve(command, args, NULL) == -1)
+		{
+			perror(program);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		wait(&status);
 	}
 }
