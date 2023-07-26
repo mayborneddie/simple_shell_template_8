@@ -17,6 +17,6 @@ void _print(char *str);
 int is_equal(char *str1, char *str2);
 
 /* Exec */
-void exec_cmd(char *command);
+void exec_cmd(char *command, const char *program);
 
 #endif
