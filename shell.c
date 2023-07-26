@@ -11,33 +11,22 @@ int main(int argc __attribute__((unused)), char const *argv[])
 {
 	char *str;
 
-	if (isatty(STDIN_FILENO))
+	while (1)
 	{
-		while (1)
-		{
+		if (isatty(STDIN_FILENO))
 			_print("#cisfun$ ");
+		str = readline();
+		if (str == NULL)
+			break;
 
-			str = readline();
-			if (str == NULL)
-				continue;
-
-			trim(str);
-			if (is_equal(str, "exit"))
-			{
-				free(str);
-				exit(EXIT_SUCCESS);
-			}
-
-			exec_cmd(str, argv[0]);
-		}
-	}
-	else
-	{
-		while ((str = readline()) != NULL)
+		trim(str);
+		if (is_equal(str, "exit"))
 		{
-			trim(str);
-			exec_cmd(str, argv[0]);
+			free(str);
+			exit(EXIT_SUCCESS);
 		}
+
+		exec_cmd(str, argv[0]);
 	}
 
 	return (0);
