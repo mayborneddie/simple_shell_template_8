@@ -32,5 +32,7 @@ void print_env(void);
 /* Memory */
 void *_memchr(const void *s, int c, size_t n);
 void *_memcpy(void *dest, const void *src, size_t n);
+void *_realloc(void *ptr, size_t size);
+void delete_array(char **arr);
 
 #endif

@@ -56,13 +56,13 @@ char **split(char *str, char delimiter)
 		if (*end == delimiter)
 		{
 			*end = '\0';
-			tokens = realloc(tokens, sizeof(char *) * (num_tokens + 1));
+			tokens = _realloc(tokens, sizeof(char *) * (num_tokens + 1));
 			tokens[num_tokens++] = start;
 			start = end + 1;
 		}
 	}
 
-	tokens = realloc(tokens, sizeof(char *) * (num_tokens + 2));
+	tokens = _realloc(tokens, sizeof(char *) * (num_tokens + 2));
 	tokens[num_tokens++] = start;
 	tokens[num_tokens] = NULL;
 

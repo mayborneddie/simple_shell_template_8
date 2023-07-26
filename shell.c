@@ -33,6 +33,5 @@ int main(int argc __attribute__((unused)), char const *argv[])
 		}
 		exec_cmd(str, argv[0]);
 	}
-
 	return (0);
 }

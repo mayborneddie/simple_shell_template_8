@@ -10,7 +10,7 @@
 void exec_cmd(char *command, const char *program)
 {
 	pid_t pid;
-	int status;
+	int status, res;
 
 	pid = fork();
 
@@ -24,17 +24,17 @@ void exec_cmd(char *command, const char *program)
 		char **args = split(command, ' ');
 		char *envp[] = {NULL};
 
-		if (execve(args[0], args, envp) == -1)
+		res = execve(args[0], args, envp),
+		delete_array(args);
+		if (res == -1)
 		{
 			perror(program);
 			exit(EXIT_FAILURE);
 		}
-		free(args);
 	}
 	else
 	{
 		wait(&status);
 	}
-
 	free(command);
 }
