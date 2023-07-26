@@ -12,11 +12,24 @@ int main(int argc __attribute__((unused)), char const *argv[])
 	char *str;
 
 	if (isatty(0))
-		do {
+	{
+		while (1)
+		{
 			_print("#cisfun$ ");
 			str = readline();
+			if (str == NULL)
+			{
+				free(str);
+				continue;
+			}
+			if (is_equal(str, "exit") == 1)
+			{
+				free(str);
+				exit(EXIT_SUCCESS);
+			}
 			exec_cmd(str, argv[0]);
-		} while (is_equal(str, "exit") == 0);
+		}
+	}
 	else
 
 		while ((str = readline()) != NULL)
