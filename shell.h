@@ -20,4 +20,7 @@ int is_equal(char *str1, char *str2);
 /* Exec */
 void exec_cmd(char *command, const char *program);
 
+/* Utils */
+void trim(char *s);
+
 #endif

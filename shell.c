@@ -22,18 +22,21 @@ int main(int argc __attribute__((unused)), char const *argv[])
 				free(str);
 				continue;
 			}
+			trim(str);
 			if (is_equal(str, "exit") == 1)
 			{
 				free(str);
 				exit(EXIT_SUCCESS);
 			}
 			exec_cmd(str, argv[0]);
+			free(str);
 		}
 	}
 	else
 
 		while ((str = readline()) != NULL)
 		{
+			trim(str);
 			exec_cmd(str, argv[0]);
 			free(str);
 		}
