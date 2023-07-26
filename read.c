@@ -15,7 +15,6 @@ char *readline(void)
 
 	if (linelen == -1)
 	{
-		perror("readline");
 		free(input);
 		input = NULL;
 	}
