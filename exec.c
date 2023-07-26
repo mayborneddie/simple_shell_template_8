@@ -21,9 +21,11 @@ void exec_cmd(char *command, const char *program)
 	}
 	else if (pid == 0)
 	{
-		char *args[] = {NULL};
+		char *args[] = {NULL, NULL};
+		char *envp[] = {NULL};
 
-		if (execve(command, args, NULL) == -1)
+		args[0] = command;
+		if (execve(command, args, envp) == -1)
 		{
 			perror(program);
 			exit(EXIT_FAILURE);
