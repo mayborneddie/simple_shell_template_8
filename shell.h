@@ -27,4 +27,11 @@ void trim(char *s);
 /* Environ */
 void print_env(void);
 
+/* Getline */
+ssize_t _getline(char **line_ptr, size_t *line_size, int fd);
+
+/* Memory */
+void *_memchr(const void *s, int c, size_t n);
+void *_memcpy(void *dest, const void *src, size_t n);
+
 #endif
