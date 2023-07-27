@@ -27,19 +27,18 @@ void exec_cmd(char *str, const char *program)
 			path = get_command_path((const char *)args[0]);
 			if (path == NULL)
 			{
-				delete_array(args);
+				free(args);
 				exit_with_error(program);
 			}
 			args[0] = path;
 		}
 		res = execve(args[0], args, envp),
-		delete_array(args);
+		free(args);
 		if (res == -1)
 			exit_with_error(program);
 	}
 	else
-	{
 		wait(&status);
-	}
+
 	free(str);
 }
