@@ -57,3 +57,27 @@ int is_equal(char *str1, char *str2)
 
 	return (1);
 }
+/**
+ * _strncmp - Compare two strings up to a specified number of characters
+ *
+ * @s1: The first string to compare
+ * @s2: The second string to compare
+ * @n: The maximum number of characters to compare
+ *
+ * Return: An integer indicating the relationship
+ * between the first n characters of s1 and s2
+ */
+int _strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t i;
+
+	for (i = 0; i < n; i++)
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+
+		else if (s1[i] == '\0' || s2[i] == '\0')
+			return (0);
+	}
+	return (0);
+}

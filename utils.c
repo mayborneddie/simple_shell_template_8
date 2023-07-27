@@ -87,3 +87,64 @@ size_t _len(char **arr)
 	}
 	return (count);
 }
+
+/**
+ * _strlen - Calculates the length of a string
+ * @str: The string to calculate the length of
+ *
+ * Return: The length of the string
+ */
+int _strlen(const char *str)
+{
+	int len = 0;
+
+	while (str[len] != '\0')
+		len++;
+
+	return (len);
+}
+/**
+ * _strtok - Find the next token in a string
+ *
+ * @str: The string to tokenize
+ * @delim: The delimiter characters
+ *
+ * Return: A pointer to the next token in the string, or NULL if there are no
+ *         more tokens
+ */
+char *_strtok(char *str, const char *delim)
+{
+	static char *last_token;
+	char *token = NULL;
+
+	if (str != NULL)
+		last_token = str;
+
+	if (last_token == NULL)
+		return (NULL);
+
+	token = last_token;
+
+	while (*last_token != '\0')
+	{
+		const char *d = delim;
+
+		while (*d != '\0')
+		{
+			if (*last_token == *d)
+			{
+				*last_token = '\0';
+				last_token++;
+				if (*last_token != '\0')
+					return (token);
+
+				last_token = NULL;
+				return (token);
+			}
+			d++;
+		}
+		last_token++;
+	}
+	last_token = NULL;
+	return (token);
+}
