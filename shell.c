@@ -9,7 +9,7 @@
  */
 int main(int argc __attribute__((unused)), char const *argv[])
 {
-	char *str;
+	char *str, **args;
 
 	while (1)
 	{
@@ -20,17 +20,16 @@ int main(int argc __attribute__((unused)), char const *argv[])
 			break;
 
 		trim(str);
+		args = split(str, ' ');
 		if (is_equal(str, "exit"))
 		{
 			free(str);
+			free(args);
 			exit(EXIT_SUCCESS);
 		}
-		if (is_equal(str, "env"))
-		{
-			free(str);
-			print_env();
+		if (builtin_env(args))
 			continue;
-		}
+		free(args);
 		exec_cmd(str, argv[0]);
 	}
 	return (0);

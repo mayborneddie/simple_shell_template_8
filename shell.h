@@ -29,8 +29,8 @@ size_t _len(char **arr);
 int _strlen(const char *str);
 char *_strtok(char *str, const char *delim);
 
-/* Environ */
-void print_env(void);
+/* Builtin */
+int builtin_env(char **args);
 
 /* Memory */
 void *_memchr(const void *s, int c, size_t n);
