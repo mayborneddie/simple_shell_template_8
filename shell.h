@@ -9,7 +9,11 @@
 
 /* Macros*/
 extern char **environ;
-
+#define FREE_TWO(args, str) \
+	do {                             \
+		free(args);                  \
+		free(str);                   \
+	} while (0)
 /* Readline */
 char *readline();
 
@@ -20,7 +24,7 @@ int is_equal(char *str1, char *str2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 
 /* Exec */
-void exec_cmd(char *command, const char *program);
+void exec_cmd(char **args, const char *program);
 
 /* Utils */
 void trim(char *s);
@@ -31,6 +35,7 @@ char *_strtok(char *str, const char *delim);
 
 /* Builtin */
 int builtin_env(char **args);
+char *_getenv(const char *name);
 
 /* Memory */
 void *_memchr(const void *s, int c, size_t n);

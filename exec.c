@@ -1,44 +1,47 @@
 #include "shell.h"
 
 /**
- * exec_cmd - Execute a command string using execve
- * @str: The string to execute
- * @program: The program name to be used in case of an error.
+ * exec_cmd - Execute a command with arguments
  *
- * Return: None
+ * @args: Pointer to an array of strings
+ * containing the command and its arguments
+ * @program: Name of the current program
+ *
+ * Return: void
  */
-void exec_cmd(char *str, const char *program)
+void exec_cmd(char **args, const char *program)
 {
 	pid_t pid;
-	int status, res;
-	char *path, *envp[] = {NULL};
+	int status;
+	char *path = NULL;
+	char *envp[] = {NULL};
 
 	pid = fork();
+
 	if (pid == -1)
-		exit_with_error("fork");
+	{
+		perror(program);
+		return;
+	}
 	else if (pid == 0)
 	{
-		char **args = split(str, ' ');
-
-		trim(args[0]);
-		/*  Check whether a command is executable */
 		if (access(args[0], X_OK) != 0)
 		{
-			path = get_command_path((const char *)args[0]);
+			path = get_command_path(args[0]);
 			if (path == NULL)
 			{
-				free(args);
-				exit_with_error(program);
+				perror(program);
+				return;
 			}
 			args[0] = path;
 		}
-		res = execve(args[0], args, envp),
-		free(args);
-		if (res == -1)
-			exit_with_error(program);
+		if (execve(args[0], args, envp) == -1)
+		{
+			perror(program);
+			return;
+		}
 	}
 	else
-		wait(&status);
-
-	free(str);
+		waitpid(pid, &status, 0);
+	free(path);
 }

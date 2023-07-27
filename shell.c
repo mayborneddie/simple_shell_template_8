@@ -10,6 +10,7 @@
 int main(int argc __attribute__((unused)), char const *argv[])
 {
 	char *str, **args;
+	int exit_code = 0;
 
 	while (1)
 	{
@@ -21,16 +22,21 @@ int main(int argc __attribute__((unused)), char const *argv[])
 
 		trim(str);
 		args = split(str, ' ');
-		if (is_equal(str, "exit"))
+		trim(args[0]);
+		if (is_equal(args[0], "exit"))
 		{
-			free(str);
-			free(args);
-			exit(EXIT_SUCCESS);
+			if (args[1] != NULL)
+				exit_code = atoi(args[1]);
+			FREE_TWO(args, str);
+			exit(exit_code);
 		}
 		if (builtin_env(args))
+		{
+			FREE_TWO(args, str);
 			continue;
-		free(args);
-		exec_cmd(str, argv[0]);
+		}
+		exec_cmd(args, argv[0]);
+		FREE_TWO(args, str);
 	}
 	return (0);
 }
