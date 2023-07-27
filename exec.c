@@ -15,10 +15,7 @@ void exec_cmd(char *str, const char *program)
 
 	pid = fork();
 	if (pid == -1)
-	{
-		perror("fork");
-		exit(1);
-	}
+		exit_with_error("fork");
 	else if (pid == 0)
 	{
 		char **args = split(str, ' ');
@@ -30,19 +27,15 @@ void exec_cmd(char *str, const char *program)
 			path = get_command_path((const char *)args[0]);
 			if (path == NULL)
 			{
-				perror(program);
 				delete_array(args);
-				exit(EXIT_FAILURE);
+				exit_with_error(program);
 			}
 			args[0] = path;
 		}
 		res = execve(args[0], args, envp),
 		delete_array(args);
 		if (res == -1)
-		{
-			perror(program);
-			exit(EXIT_FAILURE);
-		}
+			exit_with_error(program);
 	}
 	else
 	{

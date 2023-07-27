@@ -41,4 +41,7 @@ void delete_array(char **arr);
 /* Path */
 char *get_command_path(const char *command);
 
+/* Errors */
+void exit_with_error(const char *error);
+
 #endif
