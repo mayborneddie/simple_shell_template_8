@@ -9,13 +9,14 @@
  */
 int main(int argc __attribute__((unused)), char const *argv[])
 {
-	char *str, **args;
+	char *str = NULL, **args = NULL;
 	int exit_code = 0;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
 			_print("#cisfun$ ");
+		FREE_TWO(args, str);
 		str = readline();
 		if (str == NULL)
 			break;
@@ -36,7 +37,6 @@ int main(int argc __attribute__((unused)), char const *argv[])
 			continue;
 		}
 		exec_cmd(args, argv[0]);
-		FREE_TWO(args, str);
 	}
 	return (0);
 }

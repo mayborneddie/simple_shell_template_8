@@ -29,16 +29,14 @@ void exec_cmd(char **args, const char *program)
 		{
 			path = get_command_path(args[0]);
 			if (path == NULL)
-			{
-				perror(program);
-				return;
-			}
+				exit_with_error(program);
+
 			args[0] = path;
 		}
 		if (execve(args[0], args, envp) == -1)
 		{
-			perror(program);
-			return;
+			free(path);
+			exit_with_error(program);
 		}
 	}
 	else
